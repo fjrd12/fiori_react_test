@@ -21,7 +21,8 @@
     "@ui5/webcomponents-react": "2.14.1",
     "@ui5/webcomponents-react-charts": "^2.14.1",
     "react": "19.1.1",
-    "react-dom": "19.1.1"
+    "react-dom": "19.1.1",
+    "react-router-dom": "^7.9.2"
   },
   "devDependencies": {
     "@types/react": "19.1.13",
