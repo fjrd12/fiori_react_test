@@ -25,6 +25,7 @@ import reactLogo from './assets/reactLogo.png';
 import profilePictureExample from './assets/profilePictureExample.png';
 import listIcon from '@ui5/webcomponents-icons/dist/list.js';
 import ValueState from '@ui5/webcomponents-base/dist/types/ValueState.js';
+import tableViewIcon from '@ui5/webcomponents-icons/dist/table-view.js';
 
 export function MyApp() {
   const [toggleCharts, setToggleCharts] = useState('lineChart');
@@ -81,6 +82,36 @@ export function MyApp() {
     },
   ];
 
+  const tableData = new Array(500).fill(null).map((_, index) => {
+    return {
+      name: `name${index}`,
+      age: Math.floor(Math.random() * 100),
+      friend: {
+        name: `friend.Name${index}`,
+        age: Math.floor(Math.random() * 100),
+      },
+    };
+  });
+
+  const tableColumns = [
+    {
+      Header: 'Name',
+      accessor: 'name', // String-based value accessors!
+    },
+    {
+      Header: 'Age',
+      accessor: 'age',
+    },
+    {
+      Header: 'Friend Name',
+      accessor: 'friend.name',
+    },
+    {
+      Header: 'Friend Age',
+      accessor: 'friend.age',
+    },
+  ];
+
   return (
     <div>
       <ShellBar
@@ -112,7 +143,7 @@ export function MyApp() {
             }
           />
         }
-        style={{ width: '300px' }}
+        style={{ width: '300px', margin: 'var(--sapContent_Margin_Small)' }}
       >
         <Text style={{ padding: 'var(--sapContent_Space_S)' }}>
           This is the content area of the Card
@@ -141,7 +172,7 @@ export function MyApp() {
             avatar={<Icon name={listIcon} />}
           />
         }
-        style={{ width: '300px' }}
+        style={{ width: '300px', margin: 'var(--sapContent_Margin_Small)' }}
       >
         <List>
           <ListItemStandard
@@ -164,6 +195,8 @@ export function MyApp() {
           </ListItemCustom>
           <ListItemCustom>
             <FlexBox
+              justifyContent={FlexBoxJustifyContent.Center}
+              wrap={FlexBoxWrap.Wrap}
               direction={FlexBoxDirection.Column}
               fitContainer
               style={{ paddingBlock: 'var(--sapContent_Space_S)' }}
@@ -184,6 +217,21 @@ export function MyApp() {
             </FlexBox>
           </ListItemCustom>
         </List>
+      </Card>
+      <Card
+        header={
+          <CardHeader
+            titleText="AnalyticalTable"
+            avatar={<Icon name={tableViewIcon} />}
+          />
+        }
+        style={{ width: '300px', margin: 'var(--sapContent_Margin_Small)' }}
+      >
+        <AnalyticalTable
+          data={tableData}
+          columns={tableColumns}
+          visibleRows={5}
+        />
       </Card>
     </div>
   );
